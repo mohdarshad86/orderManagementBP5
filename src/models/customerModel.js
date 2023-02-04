@@ -36,6 +36,17 @@ const customerSchema = new mongoose.Schema({
         min: 8,
         max: 15
     }, // encrypted password
+    balance: {
+        type: Number,
+    },
+    orders: {
+        type: Number,
+        default: 0
+    },
+    discount:{
+        type: Number,
+        default: 0
+    },
     address: {
         shipping: {
             street: {
