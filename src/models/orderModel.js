@@ -8,7 +8,8 @@ const orderSchema = mongoose.Schema(
             ref: 'customer'
         },
         items: [{
-            productId: { type: ObjectId, ref: 'product' },
+            name:{type:String},
+            price:{type:Number},
             quantity: { type: Number, min: 1 }
         }],
         

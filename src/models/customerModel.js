@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+const ObjectId = mongoose.Schema.Types.ObjectId
 const customerSchema = new mongoose.Schema({
 
     fname: {
@@ -14,8 +14,8 @@ const customerSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        enum: ['regular', 'gold', 'platinum'],
-        default: 'regular'
+        enum: ['Regular', 'Gold', 'Platinum'],
+        default: 'Regular'
     },
     email: {
         type: String,
@@ -36,53 +36,24 @@ const customerSchema = new mongoose.Schema({
         min: 8,
         max: 15
     }, // encrypted password
-    balance: {
+    totalBalance: {
         type: Number,
     },
-    orders: {
-        type: Number,
-        default: 0
-    },
-    discount:{
+    orderCount: {
         type: Number,
         default: 0
     },
-    address: {
-        shipping: {
-            street: {
-                type: String,
-                required: true,
-                trim: true
-            },
-            city: {
-                type: String,
-                required: true,
-                trim: true
-            },
-            pincode: {
-                type: Number,
-                required: true,
-                trim: true
-            }
-        },
-        billing: {
-            street: {
-                type: String,
-                required: true,
-                trim: true
-            },
-            city: {
-                type: String,
-                required: true,
-                trim: true
-            },
-            pincode: {
-                type: Number,
-                required: true,
-                trim: true
-            }
+    discountBal: [{
+        orderId: { 
+            type: ObjectId, 
+            ref: 'order',
+         },
+
+        balance: {
+            type: Number,
+            default: 0
         }
-    }
+    }]
 }, { timestamps: true })
 
 module.exports = mongoose.model('customer', customerSchema)
